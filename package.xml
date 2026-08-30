@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd"
+            schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>ida_vehicle_bringup</name>
+  <version>1.0.0</version>
+  <description>
+    Real-hardware bringup: real_hw.launch.py + URDF. Composes the vehicle-side
+    stack. NOTE: launch files reference node executables from the split
+    algorithm repos — see README "Integration mapping" before running.
+    All vehicle-specific geometry has been removed from the URDF (placeholders).
+  </description>
+  <maintainer email="ieeegesb@gmail.com">IEEE Ege Mavi İnci Yazılım Ekibi</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclpy</depend>
+  <depend>robot_state_publisher</depend>
+  <depend>tf2_ros</depend>
+  <depend>mavros</depend>
+  <depend>v4l2_camera</depend>
+  <depend>nav2_bringup</depend>
+  <depend>topic_tools</depend>
+  <!-- Split algorithm packages this bringup composes: -->
+  <depend>ida_lidar</depend>
+  <depend>ida_lidar_clustering</depend>
+  <depend>ida_camera</depend>
+  <depend>ida_yolo_detection</depend>
+  <depend>ida_camera_lidar_fusion</depend>
+  <depend>ida_mission</depend>
+  <depend>ida_navigation</depend>
+  <depend>ida_mavros_bridge_core</depend>
+  <depend>ida_guidance_governor</depend>
+  <depend>ida_mavlink_bridge</depend>
+  <depend>ida_estop_gpio</depend>
+  <depend>ida_safety</depend>
+  <depend>ida_data_logger</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

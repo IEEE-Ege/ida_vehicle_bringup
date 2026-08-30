@@ -1,0 +1,2 @@
+# Bringup package (launch + URDF) — no pip dependencies.
+# Composes the split algorithm packages; resolve with rosdep.

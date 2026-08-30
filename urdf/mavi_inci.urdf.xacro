@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<robot name="usv" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       USV — URDF/Xacro (PUBLIC / SANITIZED)
+       Frames:
+         base_link      — boat centre (on the ground plane)
+         lidar_link     — LiDAR mount point
+         camera_link    — camera optical centre
+         base_footprint — ground projection for Nav2
+
+       NOTE: All vehicle-specific geometry (hull dimensions, mass, inertia and
+       exact sensor mounting offsets) has been REMOVED from this public copy and
+       replaced with obvious placeholders. Fill in your own platform's values.
+       ═══════════════════════════════════════════════════════════════════ -->
+
+  <link name="base_footprint"/>
+
+  <joint name="base_footprint_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child  link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <!-- PRIVATE DATA REMOVED: real hull size (L W H, metres). -->
+        <box size="1.0 1.0 1.0"/>   <!-- placeholder -->
+      </geometry>
+      <material name="hull_blue">
+        <color rgba="0.1 0.3 0.8 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="1.0 1.0 1.0"/>   <!-- placeholder -->
+      </geometry>
+    </collision>
+    <inertial>
+      <!-- PRIVATE DATA REMOVED: real mass (kg) and inertia tensor. -->
+      <mass value="1.0"/>           <!-- placeholder -->
+      <inertia ixx="1.0" ixy="0" ixz="0"
+               iyy="1.0" iyz="0"
+               izz="1.0"/>
+    </inertial>
+  </link>
+
+  <!-- ─── LiDAR ─────────────────────────────────────────────────────────── -->
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child  link="lidar_link"/>
+    <!-- PRIVATE DATA REMOVED: real LiDAR mount offset (x y z, metres). -->
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>   <!-- placeholder -->
+  </joint>
+
+  <link name="lidar_link">
+    <visual>
+      <geometry><cylinder radius="0.04" length="0.08"/></geometry>
+      <material name="lidar_black"><color rgba="0.1 0.1 0.1 1.0"/></material>
+    </visual>
+  </link>
+
+  <!-- ─── Camera ────────────────────────────────────────────────────────── -->
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child  link="camera_link"/>
+    <!-- PRIVATE DATA REMOVED: real camera mount offset (x y z, metres). -->
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>   <!-- placeholder -->
+  </joint>
+
+  <link name="camera_link">
+    <visual>
+      <geometry><box size="0.03 0.09 0.03"/></geometry>
+      <material name="cam_grey"><color rgba="0.5 0.5 0.5 1.0"/></material>
+    </visual>
+  </link>
+
+  <!-- Camera optical frame (ROS convention: x=right, y=down, z=forward) -->
+  <joint name="camera_optical_joint" type="fixed">
+    <parent link="camera_link"/>
+    <child  link="camera_optical_frame"/>
+    <origin xyz="0 0 0" rpy="-1.5707963 0 -1.5707963"/>
+  </joint>
+
+  <link name="camera_optical_frame"/>
+
+</robot>
